@@ -407,6 +407,10 @@ bool ariel::operator<=(float lnum,const Fraction& rnum){
  * @return fraction after ++
  */
 Fraction& Fraction::operator++() {
+    float check = float(numerator_)+denominator_;
+    if (check>=float (max_int)){
+        throw std::overflow_error("overflow");
+    }
     numerator_+=denominator_;
     return *this;
 }
@@ -416,6 +420,10 @@ Fraction& Fraction::operator++() {
  * @return fraction after --
  */
 Fraction& Fraction::operator--() {
+    float check = float(numerator_)-denominator_;
+    if (check<=float (min_int)){
+        throw std::overflow_error("overflow");
+    }
     numerator_-=denominator_;
     return *this;
 }
@@ -426,6 +434,10 @@ Fraction& Fraction::operator--() {
  */
 const Fraction Fraction::operator++(int) {
     Fraction old(*this);    // save the fraction to return it
+    float check = float(numerator_)+denominator_;
+    if (check>=float (max_int)){
+        throw std::overflow_error("overflow");
+    }
     numerator_+=denominator_;
     return old;
 }
@@ -436,6 +448,10 @@ const Fraction Fraction::operator++(int) {
  */
 const Fraction Fraction::operator--(int) {
     Fraction old(*this);    // save the fraction to return it
+    float check = float(numerator_)-denominator_;
+    if (check<=float (min_int)){
+        throw std::overflow_error("overflow");
+    }
     numerator_-=denominator_;
     return old;
 }
