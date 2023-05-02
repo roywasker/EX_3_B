@@ -91,8 +91,14 @@ Fraction Fraction::operator-(float other) const {
 Fraction Fraction::operator*(const Fraction &other) const {
     float numerator = float (numerator_) * other.numerator_;
     float denominator = float (denominator_) * other.denominator_;
+
     if (numerator > max_int ||numerator < min_int || denominator > max_int|| denominator< min_int){
         throw std::overflow_error("overflow");
+    }
+    if (numerator_==12345) {
+        int numerator1 = numerator_ * other.numerator_;
+        int denominator1 = denominator_ * other.denominator_;
+        std::cout << numerator1 << "/" << denominator1 << std::endl;
     }
     return Fraction(int (numerator), int (denominator));
 }
@@ -199,6 +205,8 @@ Fraction ariel::operator/(float float1,const Fraction& other){
 bool Fraction::operator==(const Fraction &other)const {
     float frac1 = float(this->numerator_)/ this->denominator_;
     float frac2 = float(other.numerator_)/ other.denominator_;
+    frac1=round(frac1 * 1000) / 1000;
+    frac2=round(frac2 * 1000) / 1000;
     Fraction num(this->numerator_-1, this->denominator_);
     bool flag= false;
     if ((numerator_==other.numerator_)&&(denominator_==other.denominator_)){
